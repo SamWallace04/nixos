@@ -5,20 +5,20 @@
   options.my = {
     username = lib.mkOption {
       type = lib.types.str;
-      default = "youruser"; # <- change to the user you created during install
+      default = "sam"; # <- change to the user you created during install
     };
     fullName = lib.mkOption {
       type = lib.types.str;
-      default = "Your Name";
+      default = "Sam Wallace";
     };
     email = lib.mkOption {
       type = lib.types.str;
-      default = "you@example.com";
+      default = "sam@wallace.gg";
     };
     # Where this repo lives on disk; used by `nh`.
     flakePath = lib.mkOption {
       type = lib.types.str;
-      default = "/home/youruser/nixos-config";
+      default = "/home/sam/nixos-config";
     };
   };
 }
