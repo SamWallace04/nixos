@@ -1,30 +1,35 @@
+{ config, ... }:
+let
+  dots = config.my.dotfilesPath;
+in
 {
   # Needed system-side so zsh is a valid login shell.
   flake.modules.nixos.zsh = {
     programs.zsh.enable = true;
   };
 
-  flake.modules.homeManager.zsh = {
-    programs.zsh = {
-      enable = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
-      history.size = 50000;
-      shellAliases = {
-        ll = "ls -la";
-        rebuild = "nh os switch";
-        update = "nh os switch --update";
-      };
-    };
+  # Your own .zshrc/.zprofile/.zshenv from the dotfiles repo. Home Manager's
+  # programs.zsh is deliberately NOT enabled, since it would generate these files.
+  flake.modules.homeManager.zsh =
+    { config, pkgs, ... }:
+    let
+      link = p: config.lib.file.mkOutOfStoreSymlink "${dots}/${p}";
+    in
+    {
+      home.file.".zshrc".source = link "home/.zshrc";
+      home.file.".zprofile".source = link "home/.zprofile";
+      home.file.".zshenv".source = link "home/.zshenv";
 
-    programs.starship.enable = true;
-    programs.fzf.enable = true;
-    programs.zoxide.enable = true;
+      # The paths your .zshrc expects, provided from Nix instead of git clones.
+      home.file.".oh-my-zsh".source = "${pkgs.oh-my-zsh}/share/oh-my-zsh";
+      home.file.".zsh/zsh-autosuggestions".source =
+        "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
 
-    # Per-project dev shells via `use flake` in .envrc
-    programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
+      home.packages = with pkgs; [
+        starship
+        eza
+        bat
+        fzf
+      ];
     };
-  };
 }

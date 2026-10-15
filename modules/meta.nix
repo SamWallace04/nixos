@@ -20,5 +20,9 @@
       type = lib.types.str;
       default = "/home/sam/nixos-config";
     };
+    dotfilesPath = lib.mkOption {
+     type = lib.types.str;
+     default = "/home/sam/dotfiles";
+    };
   };
 }

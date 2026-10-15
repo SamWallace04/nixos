@@ -41,16 +41,5 @@
       # };
     };
 
-  # User side: make Hyprland cheap enough for software rendering.
-  # Merges into the settings from desktop/hyprland — only hosts that import this get it.
-  flake.modules.homeManager.truenas-guest = {
-    wayland.windowManager.hyprland.settings.config = {
-      cursor.no_hardware_cursors = true;
-      decoration = {
-        blur.enabled = false;
-        shadow.enabled = false;
-      };
-      animations.enabled = false;
-    };
-  };
+  # Hyprland rendering tweaks for this VM live in the dotfiles repo: hypr/hosts/nixvm.lua
 }

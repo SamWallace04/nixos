@@ -14,6 +14,8 @@ in
       nixos.user
       nixos.zsh
       nixos.hyprland
+      nixos.neovim
+      nixos.noctalia
       nixos.audio
       nixos.fonts
       nixos.truenas-guest
@@ -29,7 +31,9 @@ in
             zsh
             terminal
             hyprland
-            truenas-guest
+            noctalia
+            launchers
+            neovim
             git
             go
             rust

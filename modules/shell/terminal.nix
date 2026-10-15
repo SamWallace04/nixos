@@ -1,16 +1,21 @@
+{ config, ... }:
+let
+  dots = config.my.dotfilesPath;
+in
 {
-  flake.modules.homeManager.terminal = {
-    # kitty needs OpenGL; under TrueNAS it runs on llvmpipe (software). Swap for `foot` if it's sluggish.
-    programs.kitty = {
-      enable = true;
-      font = {
-        name = "JetBrainsMono Nerd Font";
-        size = 11;
-      };
-      settings = {
-        enable_audio_bell = false;
-        confirm_os_window_close = 0;
-      };
+  # Ghostty + zellij, configs linked from the dotfiles repo.
+  # Ghostty needs OpenGL 4.3; the TrueNAS VM provides that via llvmpipe (software), so it works but isn't fast.
+  flake.modules.homeManager.terminal =
+    { config, pkgs, ... }:
+    let
+      link = p: config.lib.file.mkOutOfStoreSymlink "${dots}/${p}";
+    in
+    {
+      home.packages = with pkgs; [
+        ghostty
+        zellij
+      ];
+      xdg.configFile."ghostty".source = link "ghostty";
+      xdg.configFile."zellij".source = link "zellij";
     };
-  };
 }
