@@ -3,9 +3,12 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        tailscale
         thunar
         peazip
+        discord
+        proton-vpn
+        sublime4
+        qalculate-qt
       ];
     };
 }

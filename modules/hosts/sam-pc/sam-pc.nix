@@ -8,6 +8,7 @@ in
     modules = [
       ./_hardware.nix
       inputs.home-manager.nixosModules.home-manager
+      inputs.self.modules.nixos.fonts
 
       nixos.nix-settings
       nixos.base
@@ -19,7 +20,8 @@ in
       nixos.audio
       nixos.fonts
       nixos.amd-gpu
-
+      nixos.gaming
+      nixos.tailscale
       {
         networking.hostName = "sam-pc";
         # Match the value in the /etc/nixos/configuration.nix the installer generated.
@@ -66,6 +68,7 @@ in
             gaming
             browser
             general
+            tailscale
           ];
           home.stateVersion = "26.05";
         };
