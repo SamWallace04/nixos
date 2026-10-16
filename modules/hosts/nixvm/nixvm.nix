@@ -38,6 +38,7 @@ in
             go
             rust
             dotnet
+            cli-tools
           ];
           home.stateVersion = "26.05";
         };

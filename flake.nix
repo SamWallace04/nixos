@@ -8,6 +8,9 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
+    zen-browser.url = "github:youwen5/zen-browser-flake/458cd16116c362a5e92d5db6bdc3599e4e8b1f4a";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
     import-tree.url = "github:vic/import-tree";
 
     home-manager.url = "github:nix-community/home-manager";
