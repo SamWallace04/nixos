@@ -19,6 +19,7 @@ in
       nixos.audio
       nixos.fonts
       nixos.amd-gpu
+      nixos.data-drives
 
       {
         networking.hostName = "sam-pc";
